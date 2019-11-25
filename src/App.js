@@ -30,21 +30,14 @@ function App() {
                 width: '20vw',
                 minWidth: 200,
                 maxWidth: 400,
+                backgroundColor:'#8563c3'
               }}
             >
               <h1 style={{textAlign: 'center'}}>Concepts</h1>
               <List {...props} />
             </div>
-            {/* <div
-              style={{
-                flex: 1,
-              }}
-            >
-              <h1 style={{textAlign: 'center'}}>Your Implementation</h1>
-              <Exercises {...props} />
-            </div> */}
-            <div style={{flex: 1}}>
-              <h1 style={{textAlign: 'center'}}>Final Implementation</h1>
+            <div style={{flex: 1,backgroundColor:'lightblue'}}>
+              <h1 style={{textAlign: 'center'}}>Implementation</h1>
               <Final {...props} />
             </div>
           </Div>

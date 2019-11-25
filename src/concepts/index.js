@@ -50,11 +50,22 @@ function Exercises({match}) {
 
 function List() {
   return (
-    <div>
+    <div style={{backgroundColor:'#8563c3'}}>
       <ol style={{paddingLeft: 0}}>
         {exercises.map(({slug, title}) => (
-          <li key={slug}>
-            <Link to={`/exercise/${slug}`}>{title}</Link>
+          <li key={slug} style={{
+            color: 'white',
+            fontFamily: 'proxima nova',
+            fontWeight: '100',
+            fontSize: '15px',
+            textAlign: 'center',
+            border: 'solid 2px black',
+            borderRadius: '50px',
+            padding: '10px',
+            textDecoration: 'none'
+
+          }}>
+            <Link to={`/exercise/${slug}`} style={{ color: 'white',fontWeight: '100'}} >{title}</Link>
           </li>
         ))}
       </ol>

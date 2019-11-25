@@ -18,5 +18,14 @@
 }
 
 .App-link {
-  color: #09d3ac;
+  color: #31A6FF;
+  font-family: "proxima nova";
+  font-weight: 100;
+  font-size: 56px;
+  text-align: center;
+  border: solid 2px #31A6FF;
+  border-radius: 50px;
+  padding: 10px 80px;
+
+
 }

@@ -23,7 +23,7 @@
 //     this.props.fetch(`/users/${this.props.username}`)
 //       .then(
 //         ({data: user}) => this.setState({user}),
-//         // should add an error handler here :)
+//         // should add an error handler here 
 //       )
 //   }
 //
@@ -39,9 +39,7 @@
 //   }
 // }
 //
-// UserProfile.propTypes = {
-//   username: PropTypes.number.isRequired
-// }
+//
 // ```
 //
 // See https://facebook.github.io/react/docs/component-specs.html
@@ -52,11 +50,20 @@ import PropTypes from 'prop-types'
 import axios from 'axios'
 
 class RepoListContainer extends Component {
+  /* 
+  From ES6 onwards on all most all browsers except IE you can declare static properties in a class and before we learned 
+  declare propTypes like RepoListContainer.propTypes = {} objects but that's only for functional components, if you have class based
+  component you can declare them as above and also default proptypes
+    <RepoListContainer>
+      <RepoList/>
+    </RepoListContainer>
+
+  */
   static propTypes = {
     username: PropTypes.string.isRequired,
     fetch: PropTypes.func,
   }
-  static defaultProps = {fetch: axios.get}
+  static defaultProps = {fetch: axios.get} // if you don't specify the fetch it will be default axios.get 
   state = {repos: null, loading: false, error: null}
 
   componentDidMount() {
@@ -66,12 +73,9 @@ class RepoListContainer extends Component {
   fetchRepos() {
     this.setState({repos: null, loading: true, error: null})
     this.props
-      .fetch(
-        `https://api.github.com/users/${this.props
-          .username}/repos?per_page=100&sort=pushed`,
-      )
+      .fetch()
       .then(
-        ({data: repos}) => this.setState({repos, error: null, loading: false}),
+        ({data: repos}) => this.setState({repos, error: null, loading: false}),//when it's been returned successfully we destructured the data prop and pt a alias to it
         error => this.setState({repos: null, error, loading: false}),
       )
   }
@@ -106,6 +110,7 @@ function RepoList({username, repos}) {
     </div>
   )
 }
+//you can see some extensive propTypes checking even on collections 
 RepoList.propTypes = {
   username: PropTypes.string.isRequired,
   repos: PropTypes.arrayOf(
@@ -120,7 +125,6 @@ export const Example = () => (
   <RepoListContainer username="anukkavishka" fetch={mockFetch} />
 )
 
-// This is for you. Merry Christmas 🎅 🎄 🎁
 function mockFetch() {
   const delay = 0 // set this to `Number.MAX_VALUE` test the loading state
   const sendError = false // set this to `true` to test out the error state

@@ -6,7 +6,7 @@ import React from 'react'
 function SayHello(props) {
   return (
     <div>
-      Hello {props.firstName} {props.lastName}!
+     <h1>Hello {props.firstName} {props.lastName}!</h1> 
     </div>
   )
 }

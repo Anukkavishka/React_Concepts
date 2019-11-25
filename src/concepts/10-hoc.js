@@ -1,3 +1,23 @@
+// State and peremptory code are two of the things that makes building applications more difficult.
+// And we haven't even started talking about context yet!
+// The more components we can have that have no state and completely declarative the better.
+// Doing this makes things easier to test and maintain.
+//
+// So we're going to refactor our last component to follow a pattern called "Higher Order Components"
+//
+// This is essentially a function that accepts a component and returns a new one with that manages
+// the state and renders the original component with the state as props. (react-redux follows this
+// pattern, as did react-router until recently)
+/* 
+<WrappedRepoListContainer>
+  <FetchData>
+    <RepoListContainer>
+      <RepoList/>
+    </RepoListContainer>
+  </FetchData>
+</WrappedRepoListContainer>
+*/
+
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import axios from 'axios'
@@ -22,10 +42,7 @@ function fetchDataComponent(Comp) {
     fetchRepos() {
       this.setState({repos: null, loading: true, error: null})
       this.props
-        .fetch(
-          `https://api.github.com/users/${this.props
-            .username}/repos?per_page=100&sort=pushed`,
-        )
+        .fetch()
         .then(
           ({data: repos}) =>
             this.setState({repos, error: null, loading: false}),
@@ -40,7 +57,7 @@ function fetchDataComponent(Comp) {
   }
 }
 
-function RepoListContainer({username, repos, loading, error}) {
+function RepoListContainer({username, repos, loading, error}) { //we are using the destructured objects from the above passed component 
   return (
     <div>
       {!loading ? null : <div>Loading...</div>}
@@ -57,7 +74,6 @@ function RepoListContainer({username, repos, loading, error}) {
 
 RepoListContainer.propTypes = {
   username: PropTypes.string.isRequired,
-  // honestly, I'm short-cutting here because it's a little wild. Ask me if you're curious.
   repos: PropTypes.any,
   error: PropTypes.any,
   loading: PropTypes.bool,
@@ -66,7 +82,7 @@ RepoListContainer.propTypes = {
 function RepoList({username, repos}) {
   return (
     <div>
-      <h1>{username}'s repos</h1>
+      <h1>{username}'s repos Rendered By the HOC Pattern</h1>
       <ul style={{textAlign: 'left'}}>
         {repos.map(repo => {
           return <li key={repo.id}>{repo.name}</li>
@@ -89,7 +105,6 @@ export const Example = () => (
   <WrappedRepoListContainer username="anukkavishka" fetch={mockFetch} />
 )
 
-// This is for you. Merry Christmas 🎅 🎄 🎁
 function mockFetch() {
   const delay = 0 // set this to `Number.MAX_VALUE` test the loading state
   const sendError = false // set this to `true` to test out the error state

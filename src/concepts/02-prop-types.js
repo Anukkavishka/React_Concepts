@@ -11,7 +11,9 @@ import PropTypes from 'prop-types'
 function SayHello(props) {
   return (
     <div>
-      Hello {props.firstName} {props.lastName}!
+      <h1>Let's check out some propTypes
+           <br/>{props.firstName} {props.lastName}!
+      </h1>
     </div>
   )
 }

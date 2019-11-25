@@ -34,7 +34,7 @@ Box.propTypes = {
 
 export const Example = () => (
   <div>
-    <Box size="small" style={{backgroundColor: 'lightblue'}}>
+    <Box size="small" style={{backgroundColor: '#a1c363'}}>
       I'm in a small box!
     </Box>
     <Box size="medium" style={{backgroundColor: 'lightgreen'}}>
